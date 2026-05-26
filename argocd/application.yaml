@@ -9,7 +9,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/YOUR_USERNAME/self-healing-platform.git
+    repoURL: https://github.com/shantanu23-case/self-healing-platform.git
     targetRevision: HEAD
     path: apps
 
