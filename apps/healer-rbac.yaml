@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: healer-sa
+  namespace: demo
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: healer-role
+  namespace: demo
+rules:
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "patch", "update"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: healer-binding
+  namespace: demo
+subjects:
+- kind: ServiceAccount
+  name: healer-sa
+roleRef:
+  kind: Role
+  name: healer-role
+  apiGroup: rbac.authorization.k8s.io

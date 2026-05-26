@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: selfheal-rules
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  groups:
+  - name: selfheal
+    rules:
+    - alert: DemoAppDown
+      expr: kube_deployment_status_replicas_available{deployment="selfheal-demo",namespace="demo"} == 0
+      for: 30s
+      labels:
+        severity: critical
+      annotations:
+        summary: Selfheal demo is down
